@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Train {
+    private final static String CONNECTOR = "::";
     List<Wagon> wagons = new LinkedList<>();
 
     public Train(String trainWagons) {
@@ -73,7 +74,7 @@ public class Train {
         return wagons
                 .stream()
                 .map(Wagon::print)
-                .collect(Collectors.joining("::"));
+                .collect(Collectors.joining(Train.CONNECTOR));
     }
 
 
