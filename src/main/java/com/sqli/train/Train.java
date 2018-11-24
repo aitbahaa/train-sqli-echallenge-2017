@@ -14,12 +14,17 @@ public class Train {
                 .chars()
                 .mapToObj(chaar -> (char) chaar)
                 .forEach(wagonChar -> {
-                    wagons.add(constructWagon(wagonChar));
+                    Wagon tmpWagon = WagonFactory.createWagon(wagonChar);
+                    if (tmpWagon instanceof Head && !wagons.isEmpty()) ((Head)tmpWagon).last();
+                    wagons.add(
+                            tmpWagon
+                    );
+
                 });
 
     }
 
-    private Wagon constructWagon(char wagonChar) {
+    /*private Wagon constructWagon(char wagonChar) {
         Wagon wagon = null;
 
         switch (wagonChar) {
@@ -40,7 +45,7 @@ public class Train {
         }
 
         return wagon;
-    }
+    }*/
 
     public boolean fill() {
         Cargo cargo = (Cargo) findAnEmptyCargo();
@@ -77,6 +82,12 @@ public class Train {
                 .collect(Collectors.joining(Train.CONNECTOR));
     }
 
+    public static void main(String[] args) {
+        Train train = new Train("HPRPH");
+        System.out.println(train.print());
 
+        train = new Train("HPRP");
+        System.out.println(train.print());
+    }
 
 }
